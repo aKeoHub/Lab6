@@ -1,4 +1,4 @@
-
+package ca.sait.lab6.dataaccess;
 
 import java.sql.*;
 
