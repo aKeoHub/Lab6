@@ -17,7 +17,7 @@ public class UserDB {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        String sql = "SELECT * FROM USER INNER JOIN role ON role_id = user.role";
+        String sql = "SELECT * FROM USER INNER JOIN role ON role_id = user.role WHERE ACTIVE = 1";
 
         try {
             ps = con.prepareStatement(sql);
@@ -84,7 +84,7 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "INSERT INTO user (`email`, `active`, `first_name`, `last_name`, `password`, `role`) VALUES (?, ?, ?', ?, ?, ?)";
+        String sql = "INSERT INTO user(`email`, `first_name`, `last_name`, `password`, `role`) VALUES (?, ?, ?, ?, ?)";
 
         boolean inserted = false;
 
@@ -103,6 +103,7 @@ public class UserDB {
 //                   inserted = ps.executeUpdate();
             inserted = ps.executeUpdate() != 0 ? true : false;
             
+
         } finally {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
@@ -129,7 +130,7 @@ public class UserDB {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
         }
-        
+
         return updated;
     }
 
@@ -137,19 +138,20 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "DELETE FROM user WHERE email = ?";
-        
+        //String sql = "DELETE FROM user WHERE email = ?";
+        String sql = "Update user SET active = 0 WHERE email = ?";
+
         boolean deleted;
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, user.getEmail());
-           deleted = ps.executeUpdate() != 0;
+            deleted = ps.executeUpdate() != 0;
         } finally {
             DBUtil.closePreparedStatement(ps);
             cp.freeConnection(con);
         }
-        
+
         return deleted;
     }
 
