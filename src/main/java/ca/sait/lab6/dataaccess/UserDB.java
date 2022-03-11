@@ -96,13 +96,7 @@ public class UserDB {
             ps.setString(4, user.getPassword());
             ps.setInt(5, user.getRole().getId());
 
-//           if (ps.executeUpdate(); != 0) {
-//            inserted = true;
-//        } else
-//           inserted = false;
-//                   inserted = ps.executeUpdate();
             inserted = ps.executeUpdate() != 0 ? true : false;
-            
 
         } finally {
             DBUtil.closePreparedStatement(ps);

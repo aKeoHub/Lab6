@@ -35,7 +35,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
 
         UserService service = new UserService();
-                
+
         try {
             List<User> users = service.getAll();
 
@@ -44,8 +44,6 @@ public class UserServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-
 
     }
 
@@ -90,7 +88,7 @@ public class UserServlet extends HttpServlet {
             }
 
         } else if (action != null && action.equals("delete")) {
-            
+
             try {
                 String email = request.getParameter("email");
                 service.delete(email);
@@ -99,7 +97,7 @@ public class UserServlet extends HttpServlet {
                 System.out.println(ex);
             }
         } else if (action != null && action.equals("edit")) {
-                        try {
+            try {
                 String firstName = request.getParameter("first");
                 String lastName = request.getParameter("last");
                 String email = request.getParameter("email");
