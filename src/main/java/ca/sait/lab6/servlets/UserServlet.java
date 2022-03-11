@@ -98,6 +98,29 @@ public class UserServlet extends HttpServlet {
                 Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println(ex);
             }
+        } else if (action != null && action.equals("edit")) {
+                        try {
+                String firstName = request.getParameter("first");
+                String lastName = request.getParameter("last");
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                String role;
+                roleId = checkRole(request.getParameter("role"));
+
+                if (roleId == 1) {
+                    role = "System Admin";
+                } else if (roleId == 2) {
+                    role = "Regular User";
+                } else {
+                    role = "Company Admin";
+                }
+
+                Role newRole = new Role(roleId, role);
+                service.update(email, true, firstName, lastName, password, newRole);
+            } catch (Exception ex) {
+                Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+            }
         }
 
         UserService userService = new UserService();

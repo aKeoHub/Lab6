@@ -31,7 +31,7 @@ public class UserDB {
                 String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 int roleId = rs.getInt(6);
-                String roleName = rs.getString(7);
+                String roleName = rs.getString(8);
 
                 Role role = new Role(roleId, roleName);
 
@@ -65,7 +65,7 @@ public class UserDB {
                 String lastName = rs.getString(4);
                 String password = rs.getString(5);
                 int roleId = rs.getInt(6);
-                String roleName = rs.getString(7);
+                String roleName = rs.getString(8);
 
                 Role role = new Role(roleId, roleName);
 
@@ -116,7 +116,7 @@ public class UserDB {
         ConnectionPool cp = ConnectionPool.getInstance();
         Connection con = cp.getConnection();
         PreparedStatement ps = null;
-        String sql = "UPDATE user SET `first_name` = ?, `last_name`, `password` = ?, `role` = ? WHERE  `email` = ?";
+        String sql = "UPDATE user SET `first_name` = ?, `last_name` = ?, `password` = ?, `role` = ? WHERE  `email` = ?";
         boolean updated;
         try {
             ps = con.prepareStatement(sql);
